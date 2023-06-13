@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { useState } from "react";
+import IncreaseButton from "./components/IncreaseBtn";
+import DecreaseButton from "./components/decreaseBtn";
+import ResetButton from "./components/ResetBtn";
 
 function App() {
-  const [count, setCount] = useState(0)
+  let [value, setValue] = useState(0);
+
+	const valueEl = document.querySelector('.value');
+
+	if (valueEl) {
+		if (value > 0) {
+			valueEl.style.color = "green";
+		} else if (value < 0) {
+			valueEl.style.color = "red";
+		} else {
+			valueEl.style.color = "#353535";
+		}
+	}
+
+  function increaseValue() {
+    setValue(value + 1);
+  }
+
+  function decreaseValue() {
+    setValue(value - 1);
+  }
+
+  function resetValue() {
+    setValue((value = 0));
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="counter-wrapper">
+      <div className="counter">
+        <h1 className="value">{value}</h1>
+        <DecreaseButton decrement={decreaseValue} />
+        <ResetButton reset={resetValue} />
+        <IncreaseButton increment={increaseValue} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
