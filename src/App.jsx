@@ -11,9 +11,9 @@ function App() {
 
 	if (valueEl) {
 		if (value > 0) {
-			valueEl.style.color = "green";
+			valueEl.style.color = "teal";
 		} else if (value < 0) {
-			valueEl.style.color = "red";
+			valueEl.style.color = "#9e000d";
 		} else {
 			valueEl.style.color = "#353535";
 		}
