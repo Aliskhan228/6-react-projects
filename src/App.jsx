@@ -1,8 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import IncreaseButton from "./components/IncreaseBtn";
-import DecreaseButton from "./components/decreaseBtn";
-import ResetButton from "./components/ResetBtn";
+import MyButton from "./components/UI/MyButton";
 
 function App() {
   let [value, setValue] = useState(0);
@@ -35,9 +33,9 @@ function App() {
     <div className="counter-wrapper">
       <div className="counter">
         <h1 className="value">{value}</h1>
-        <DecreaseButton decrement={decreaseValue} />
-        <ResetButton reset={resetValue} />
-        <IncreaseButton increment={increaseValue} />
+        <MyButton onClick={decreaseValue}>DECREASE</MyButton>
+        <MyButton onClick={resetValue}>RESET</MyButton>
+        <MyButton onClick={increaseValue}>INCREASE</MyButton>
       </div>
     </div>
   );
