@@ -1,41 +1,32 @@
 import "./App.css";
 import { useState } from "react";
 import MyButton from "./components/UI/MyButton";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment, reset } from "./store/slices/counterSlice";
 
 function App() {
-  let [value, setValue] = useState(0);
+  const count = useSelector((state) => state.counter.value);
+	const dispatch = useDispatch();
 
 	const valueEl = document.querySelector('.value');
 
 	if (valueEl) {
-		if (value > 0) {
+		if (count > 0) {
 			valueEl.style.color = "teal";
-		} else if (value < 0) {
+		} else if (count < 0) {
 			valueEl.style.color = "#9e000d";
 		} else {
 			valueEl.style.color = "#353535";
 		}
 	}
 
-  function increaseValue() {
-    setValue(value + 1);
-  }
-
-  function decreaseValue() {
-    setValue(value - 1);
-  }
-
-  function resetValue() {
-    setValue((value = 0));
-  }
-
   return (
     <div className="counter-wrapper">
       <div className="counter">
-        <h1 className="value">{value}</h1>
-        <MyButton onClick={decreaseValue}>DECREASE</MyButton>
-        <MyButton onClick={resetValue}>RESET</MyButton>
-        <MyButton onClick={increaseValue}>INCREASE</MyButton>
+        <h1 className="value">{count}</h1>
+        <MyButton onClick={() => dispatch(decrement())}>DECREASE</MyButton>
+        <MyButton onClick={() => dispatch(reset())}>RESET</MyButton>
+        <MyButton onClick={() => dispatch(increment())}>INCREASE</MyButton>
       </div>
     </div>
   );
